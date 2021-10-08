@@ -1,11 +1,10 @@
 #!/bin/bash
-set -e
 
 function isConfigFileExists() {
     if [ -f $(dirname "$0")/config ]; then
-      echo true;
+      echo true >&2;
     else
-      echo false;
+      echo false >&2;
     fi
 }
 

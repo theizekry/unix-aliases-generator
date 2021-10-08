@@ -11,7 +11,7 @@ source $(dirname "$0")/functions.sh
 # we will generate the configuration file.
 # Otherwise, Load this config.
 
-if ! isConfigFileExists; then
+if [ ! $(isConfigFileExists) ]; then
   generateUserConfigurationFile
 fi
 
@@ -26,19 +26,19 @@ bachPath=${bachPath/bachPath=/""}
 # the source Command to reload shell environment with new added aliases in out case.
 # interacting with user command set new alias
 if ! [ -f "$HOME"/.aliases ]; then
-  echo "creating .aliases file into $HOME/.aliases..."
+  echo "creating .aliases file into "$HOME/.aliases"..."
   touch "$HOME"/.aliases && chmod 777 "$HOME"/.aliases
 
   printf '%s\n' '# Aliases Generator' > "$HOME"/.aliases
-  echo ". ~/.aliases" >> "${bachPath}"
+  echo ". "$HOME/.aliases"" >> "${bachPath}"
 
   printf '%s\n' '# Aliases Generator' > "$HOME"/.aliases
-  echo 'export PATH=$PATH:$HOME/.aliases' >> "${bachPath}"
+  echo 'export PATH=$PATH:"$HOME/.aliases"' >> "${bachPath}"
 
   echo "Done!"
   echo '# For new alias Run: aliases-generator set-new <alias-name> <alias-value>'
 else
-  . ~/.aliases
+  . "$HOME/.aliases"
 fi
 
 # Check command params, if no exit
@@ -63,14 +63,15 @@ fi
 
 # Handel is alias already exists
 # if alias name is exists then quit with error message
-if grep -q "$2" ~/.aliases; then
+if grep -q "$2" "$HOME/.aliases"; then
   echo "The alias $2 is already defined, pick another one and try again."
   exit 0
 fi
 
 # Append new alias to our .aliases file.
-echo "alias $2='""$3""'" >> ~/.aliases
-echo "alias $2 saved successfully, and ready to use."
+echo "alias $2='""$3""'" >> "$HOME/.aliases"
+#echo "INFO: Refreshing your shell profile: $SHELL_PROFILE"
+echo "INFO: alias $2 saved successfully, and ready to use."
 
 # Reload current Terminal Session
 # in another word, Replaces the shell with a completely new instance.
