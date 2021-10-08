@@ -2,7 +2,7 @@
 set -e
 
 function isConfigFileExists() {
-    if [ -f $(dirname $0)/config ]; then
+    if [ -f $(dirname "$0")/config ]; then
       echo true;
     else
       echo false;
@@ -19,21 +19,21 @@ function askForDefaultShellPath()
   do
       case $opt in
           "$HOME/.bashrc")
-              echo $opt
+              echo "$opt"
               return;
               ;;
           "$HOME/.zshrc")
-              echo $opt
+              echo "$opt"
               return;
               ;;
           "Something else!")
               read -e -p "Okay, Can you tell me your full path of your default shell?" FILEPATH
               # is Empty exit
-              if [ -z $FILEPATH ]; then
+              if [ -z "$FILEPATH" ]; then
                  echo 'Input cannot be blank, please try again!!' >&2
                  kill >&2
               fi
-              echo ${eval $FILEPATH}
+              echo "$(eval "$FILEPATH")"
               return;
               ;;
           "Quit")
@@ -49,10 +49,10 @@ function generateUserConfigurationFile()
     echo '# Welcome to Aliases Generator.' >&2
 
     bashPath=$(eval askForDefaultShellPath)
-    configPath=$(dirname $0)/config
+    configPath=$(dirname "$0")/config
 
-    echo '# Aliases Generator.' > ${configPath}
-    echo bachPath=${bashPath} >> ${configPath}
+    echo '# Aliases Generator.' > "${configPath}"
+    echo bachPath="${bashPath}" >> "${configPath}"
 
     echo 'setting your configurations ...' >&2
     echo 'Done! Your Shell is now configured successfully.' >&2

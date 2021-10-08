@@ -2,36 +2,38 @@
 set -e
 
 # Load helper files (Functions).
-source $(dirname $0)/functions.sh
+# shellcheck disable=SC1090
+# shellcheck disable=SC2046
+source $(dirname "$0")/functions.sh
 
 # check if the user config file exists or not.
 # If this the first time user run this script,
 # we will generate the configuration file.
 # Otherwise, Load this config.
 
-if ! $(isConfigFileExists); then
+if ! isConfigFileExists; then
   generateUserConfigurationFile
 fi
 
 # Load the Config Bash_src path.
 # The Path saved in the config file with key `bash_src`
 # So, grab this path value form config.
-configPath=$(dirname $0)/config
-bachPath=$(grep ^"bachPath"= ${configPath})
+configPath=$(dirname "$0")/config
+bachPath=$(grep ^"bachPath"= "${configPath}")
 bachPath=${bachPath/bachPath=/""}
 
-# Now, append very important command to (source or . bash_file)
-# This Command to reload shell environment wit new added aliases in out case.
+# Now, append very important command to use bash_file (source <bash_file> or . <bash_file>)
+# the source Command to reload shell environment with new added aliases in out case.
 # interacting with user command set new alias
-if ! [ -f $HOME/.aliases ]; then
+if ! [ -f "$HOME"/.aliases ]; then
   echo "creating .aliases file into $HOME/.aliases..."
-  touch $HOME/.aliases && chmod 777 $HOME/.aliases
+  touch "$HOME"/.aliases && chmod 777 "$HOME"/.aliases
 
-  printf '%s\n' '# Aliases Generator' > $HOME/.aliases
-  echo ". ~/.aliases" >> ${bachPath}
+  printf '%s\n' '# Aliases Generator' > "$HOME"/.aliases
+  echo ". ~/.aliases" >> "${bachPath}"
 
-  printf '%s\n' '# Aliases Generator' > $HOME/.aliases
-  echo 'export PATH=$PATH:$HOME/.aliases' >> ${bachPath}
+  printf '%s\n' '# Aliases Generator' > "$HOME"/.aliases
+  echo 'export PATH=$PATH:$HOME/.aliases' >> "${bachPath}"
 
   echo "Done!"
   echo '# For new alias Run: aliases-generator set-new <alias-name> <alias-value>'
@@ -67,10 +69,10 @@ if grep -q "$2" ~/.aliases; then
 fi
 
 # Append new alias to our .aliases file.
-echo "alias $2='"$3"'" >> ~/.aliases
+echo "alias $2='""$3""'" >> ~/.aliases
 echo "alias $2 saved successfully, and ready to use."
 
 # Reload current Terminal Session
-# Which means re-open new terminal session
-# Then, Shell environment is updated
-exec $SHELL
+# in another word, Replaces the shell with a completely new instance.
+# to takes new updates.
+exec "$SHELL"
