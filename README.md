@@ -1,6 +1,8 @@
-# Linux Aliases Generator.
+# Unix Aliases Generator.
 
 **It's a simple way to generate a new aliases for your Linux environment by a simple bash command!**
+
+Requirements | Linux/Unix/macOS
 
 _upcoming features_
 - [ ] adding option if the user deals with dotfiles and wants to sync his aliases to be synced with user's remote repository.
