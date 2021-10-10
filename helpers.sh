@@ -51,3 +51,9 @@ function isValidOptions() {
     exit;
   fi
 }
+
+# Die and dump (6^6)
+function dd() {
+    echo $1;
+    exit;
+}
