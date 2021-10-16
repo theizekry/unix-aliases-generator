@@ -1,28 +1,22 @@
 #!/bin/bash
 set -e
 
-bash_aliases="$HOME/.bash_aliases"
+BASH_ALIASES_PATH="$HOME/.bash_aliases"
 
-# Colors.
-BLACK=`tput setaf 0`
-RED=`tput setaf 1`
-GREEN=`tput setaf 2`
-YELLOW=`tput setaf 3`
-BLUE=`tput setaf 4`
-MAGENTA=`tput setaf 5`
-CYAN=`tput setaf 6`
-WHITE=`tput setaf 7`
-RESET=`tput sgr0`
+SCRIPT_PATH=$(dirname "$0")
+CONFIG_PATH=${SCRIPT_PATH}/config
+
+source ${SCRIPT_PATH}/colors.sh
 
 function createDotBashAliasesIfNotExists() {
-  if [ ! -f  "${bash_aliases}" ]; then
-    echo "${CYAN} - Creating ${bash_aliases} file."
-    touch "${bash_aliases}" && chmod 777 "${bash_aliases}"
+  if [ ! -f  "${BASH_ALIASES_PATH}" ]; then
+    echo "${CYAN} - Creating ${BASH_ALIASES_PATH} file."
+    touch "${BASH_ALIASES_PATH}" && chmod 777 "${BASH_ALIASES_PATH}"
     echo "${GREEN} - Created Successfully!" >&2
-    echo '# Unix Aliases Generator.' > "${bash_aliases}"
-    echo '# Data 10/10/2021.' >> "${bash_aliases}"
-    echo "# Developed by Islam Zekry https://github.com/theizekry." >> "${bash_aliases}"
-    echo '# ------------------------------------------------------' >> "${bash_aliases}"
+    echo '# Unix Aliases Generator.' > "${BASH_ALIASES_PATH}"
+    echo '# Data 10/10/2021.' >> "${BASH_ALIASES_PATH}"
+    echo "# Developed by Islam Zekry https://github.com/theizekry." >> "${BASH_ALIASES_PATH}"
+    echo '# ------------------------------------------------------' >> "${BASH_ALIASES_PATH}"
   fi
 }
 
@@ -42,7 +36,7 @@ displayHelp() {
 # is available.
 function isValidOptions() {
   # Available Options (Commands).
-  array=('set-new')
+  array=('set-new sync')
 
   # If not exists show error with help display.
   if [[ ! " ${array[*]} " =~ $1 ]]; then

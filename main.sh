@@ -21,7 +21,7 @@ isValidOptions $1
 createDotBashAliasesIfNotExists
 
 # Require all available options.
-source $(dirname "$0")/Options/options.sh
+source ${SCRIPT_PATH}/Options/options.sh
 
 # Reload current Terminal Session
 # Replaces the shell with a completely new instance to takes new updates.
