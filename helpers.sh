@@ -36,7 +36,7 @@ displayHelp() {
 # is available.
 function isValidOptions() {
   # Available Options (Commands).
-  array=('set-new sync')
+  array=('set-new sync -h --help')
 
   # If not exists show error with help display.
   if [[ ! " ${array[*]} " =~ $1 ]]; then

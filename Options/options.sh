@@ -7,8 +7,14 @@
 
 # Options:
 
+# [ For Help ]
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+  displayHelp
+exit; fi
+
 # [Set New Alias Options]
 source ${SCRIPT_PATH}/Options/SettingNewAliasOption.sh
 
 # [Sync to Remote Repository]
 source ${SCRIPT_PATH}/Options/SyncOptionHandler.sh
+

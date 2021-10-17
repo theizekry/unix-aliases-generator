@@ -52,7 +52,7 @@ function syncToRemoteRepository() {
     # Sync $HOME/.bash_aliases
 
     # The main idea of Sync that I want to make my DotfileRepo up to date.
-    # to do so, ( without this script )
+    # to do so, ( without this script ).
     # Add new alias,
     # then Source bash profile
     # then copy the $HOME/.bash_aliases to my repository (DotfileRepo path).
@@ -71,7 +71,6 @@ function syncToRemoteRepository() {
 
     echo "${CYAN}Syncing to Remote Repository, Please wait...${RESET}"
     echo
-
 
     if [[ -z $(git status --porcelain) ]];
     then
