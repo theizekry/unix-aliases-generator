@@ -2,12 +2,19 @@
 
 source ${SCRIPT_PATH}/Options/SyncingHelper.sh
 
+# Checking if the option is Sync.
+# If so, Check sync mode [ Default mode is from local to remote ].
+# otherwise, from remote to Local repository.
 if [[ ( "$1" = 'sync' ) ]]; then
-
-    # Check sync mode [ Default mode is from local to remote (--ltr) ]
-    # First Mode: From Local to Remote
-    # Second Mode: From Remote to Local
-
-    prepareToSync;
-    syncToRemoteRepository;
+    # For Default Sync.
+    if [ $# -gt 0 ] && [ $# -eq 1 ]; then
+      prepareToSync;
+      syncToRemoteRepository;
+    elif [ $# -eq 2 ]; then # Checking args if present!
+      array=('-rtl --remote-to-local')
+      [[ " ${array[*]} " =~ $2 ]] || die "${RED} Invalid Argument(s): $2."
+      # Wants to sync from remote to Local!
+      prepareToSync;
+      syncFromRemoteRepositoryToLocal;
+    fi
 fi

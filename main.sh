@@ -1,4 +1,5 @@
 #!/bin/bash
+
 set -e
 
 # Require Helpers file.
@@ -12,8 +13,8 @@ if [[ $# -eq 0 ]]; then
   exit 0
 fi
 
-# Validate the given command options is available.
-isValidOptions $1
+# Validate the given command.
+isValidCommand $1 $2
 
 # End section Validations.
 

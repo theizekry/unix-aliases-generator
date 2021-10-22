@@ -95,3 +95,59 @@ function syncToRemoteRepository() {
     # Return user back again to Previous working directory path!
     cd ~-;
 }
+
+function syncFromRemoteRepositoryToLocal() {
+
+    # Sync From User Remote repository to Local.
+    # The main idea of Sync in this mode, that we need to update the local .bash_aliases file.
+    # by get the latest updates and copy file from the Remote repo. to Home user directory.
+
+    # To do so,
+    # Get User Repository path from user config!
+    # change directory (cd `repo_path`)
+    # run git pull to update local repository.
+    # take a copy of bash file and move it to Home directory.
+    # That's it, you're Done!
+
+    # Change the current path (pwd) to be dotFilesRepository path.
+    cd ${REPO_PATH}
+
+    # Check if the Working tree not clean.
+    # Git status, is has changes.
+    if [[ ! -z $(git status --porcelain) ]];
+    then
+      echo "${RED}It seems you've some updates inside your repository!, Your working directory is not clean."
+      echo "${CYAN}Syncing operation will be aborted to save your work"
+      echo "So, please check your repository status and make your working tree clean. then try again to Syncing."
+      # Return user back again to Previous working directory path!
+      cd ~-;
+      exit 0
+    fi
+
+    echo
+    echo "${CYAN}Syncing to Remote Repository, Please wait...${RESET}"
+    echo
+
+    ### Check if we already synced with remote.
+    changed=0
+    git remote update && git status -uno | grep -q 'Your branch is behind' && changed=1
+
+    # by running previous command, if we've change, we will sync.
+    if [ $changed = 1 ]; then
+      git pull origin master
+
+      echo
+      cp .bash_aliases $HOME;
+      echo "${MAGENTA}[.bash_aliases] Copied! Successfully.${RESET}"
+
+      echo
+      echo "${GREEN}Synced Successfully!${RESET}"
+    else
+      echo
+      echo "${YELLOW}Already up-to-date!${RESET}"
+      echo
+    fi
+
+    # Return user back again to Previous working directory path!
+    cd ~-;
+}

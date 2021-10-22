@@ -10,9 +10,9 @@ source ${SCRIPT_PATH}/colors.sh
 
 function createDotBashAliasesIfNotExists() {
   if [ ! -f  "${BASH_ALIASES_PATH}" ]; then
-    echo "${CYAN} - Creating ${BASH_ALIASES_PATH} file."
+    echo "${CYAN}Creating ${BASH_ALIASES_PATH} file."
     touch "${BASH_ALIASES_PATH}" && chmod 777 "${BASH_ALIASES_PATH}"
-    echo "${GREEN} - Created Successfully!" >&2
+    echo "${GREEN}Created Successfully!"
     echo '# Unix Aliases Generator.' > "${BASH_ALIASES_PATH}"
     echo '# Data 10/10/2021.' >> "${BASH_ALIASES_PATH}"
     echo "# Developed by Islam Zekry https://github.com/theizekry." >> "${BASH_ALIASES_PATH}"
@@ -34,20 +34,23 @@ displayHelp() {
 
 # Validate the given command options
 # is available.
-function isValidOptions() {
-  # Available Options (Commands).
-  array=('set-new sync -h --help')
+function isValidCommand() {
+  # Available Options & Arguments.
+  array=('set-new sync')
 
-  # If not exists show error with help display.
-  if [[ ! " ${array[*]} " =~ $1 ]]; then
-    echo "${RED} Invalid option: $1."
-    displayHelp
-    exit;
-  fi
+  # Checking Command!
+  [[ " ${array[*]} " =~ $1 ]] || die "${RED} Invalid Command: $1."
 }
 
 # Die and dump (6^6)
 function dd() {
     echo $1;
     exit;
+}
+
+# Die the script and exit.
+die () {
+    echo >&2 "$@"
+    displayHelp
+    exit 1
 }

@@ -12,7 +12,9 @@ function validateSetNewAliasArguments() {
 function isAliasAlreadyExists() {
   # Handel is alias already exists
   # if alias name is exists then quit with error message
-  if grep -q "$2" "${BASH_ALIASES_PATH}"; then
+  #if grep -o -q "$2" "${BASH_ALIASES_PATH}"; then
+  # shellcheck disable=SC2062
+  if grep -Eio "$2"= "${BASH_ALIASES_PATH}" >&2>dev; then
     echo "${YELLOW}The alias $2 is already defined, choose another one and try again."
     exit 0
   fi
