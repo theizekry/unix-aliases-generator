@@ -12,7 +12,7 @@ It's a simple way to generate and manage your aliases for your Mac and/or Linux 
 ## **Installation**
 
 ```bash
-cd ~ && git clone git@github.com:theizekry/unix-aliases-generator.git
+cd ~ && git clone https://github.com/theizekry/unix-aliases-generator.git
 ```
 
 Now, after cloning, you've to define your last Manual alias to keep the command simple and easy.
