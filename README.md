@@ -12,7 +12,7 @@ It's a simple way to generate and manage your aliases for your Mac and/or Linux 
 ## **Installation**
 
 ```bash
-cd ~ && git clone git@git.izekry
+cd ~ && git clone git@github.com:theizekry/unix-aliases-generator.git
 ```
 
 Now, after cloning, you've to define your last Manual alias to keep the command simple and easy.
@@ -32,7 +32,7 @@ Now, put the following at the end of the file.
 
 ```bash 
 # Unix Aliases Manager.
-alias aliases='bash ~/linux-aliases-generator/main.sh'
+alias aliases='bash ~/unix-aliases-generator/main.sh'
 ```
 
 Please note that ~/.bash_aliases file only works if the following line presents
@@ -76,7 +76,7 @@ or you want to navigate to specific directory by simple word ( cd ~/code/foobar/
 > aliases set-new py 'cd ~/xyz/foobar/development/python/python-projects'
 > 
 
-Just it, added successfully and ready to use without closing your terminal or even source ( reload ) your shell profile as before this tool.
+Just it, added successfully and ready to use without closing your terminal or even source ( reload ) your shell session as before this tool.
 
 ---
 
