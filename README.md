@@ -98,10 +98,10 @@ run aliases sync
 
 If you use more than one device, such as Personal Laptop and company Laptop, or you've Linux device beside MacBook.
 
-You may need your all aliases that you use in the main device to be available in the second one and for simplicity you just use **--local-to-remote** option with **sync command**. to update your local by your remote repository by single command as bellow.
+You may need your all aliases that you use in the main device to be available in the second one and for simplicity you just use **--remote-to-local** option with **sync command**. to update your local by your remote repository by single command as bellow.
 
 ```bash
-aliases sync --local-to-remote
+aliases sync --remote-to-local
 ```
 ---
 
